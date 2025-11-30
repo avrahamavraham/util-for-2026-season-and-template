@@ -20,43 +20,40 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsytem.generalsubsytem.withsim.GeneralWithSimConstants;
 import frc.robot.subsytem.generalsubsytem.withsim.Generalstate;
 
 public class GeneralWithoutSim extends SubsystemBase {
-  TalonFX subsystemMotor = new TalonFX(0);
-  MotionMagicExpoVoltage motionMagicExpoVoltage = new MotionMagicExpoVoltage(0);
-  Generalstate state = Generalstate.KeepItIn;
+  private TalonFX subsystemMotor = new TalonFX(GeneralWithoutSimConstants.m_MotorId,GeneralWithoutSimConstants.m_CanBusName);
+  private MotionMagicExpoVoltage motionMagicExpoVoltage = new MotionMagicExpoVoltage(0);
+  private Generalstate state = Generalstate.KeepItIn;
   /** Creates a new GeneralWithoutSim. */
   public GeneralWithoutSim() {
             TalonFXConfiguration talonFXConfiguration = new TalonFXConfiguration();
             FeedbackConfigs feedbackConfigsspin = talonFXConfiguration.Feedback;
-            feedbackConfigsspin.SensorToMechanismRatio = GeneralWithSimConstants.isArm ? 
-            GeneralWithSimConstants.rotaion_Sim_Constants.POSITION_CONVERSION_FACTOR :
-             GeneralWithSimConstants.Elevator_Sim_Constants.POSITION_CONVERSION_FACTOR;
+            feedbackConfigsspin.SensorToMechanismRatio = GeneralWithoutSimConstants.POSITION_CONVERSION_FACTOR;
             MotorOutputConfigs motorOutputConfigs = talonFXConfiguration.MotorOutput;
-            motorOutputConfigs.NeutralMode = GeneralWithSimConstants.NeutralMode;
+            motorOutputConfigs.NeutralMode = GeneralWithoutSimConstants.NeutralMode;
             MotionMagicConfigs motionMagicConfigs = talonFXConfiguration.MotionMagic;
             motionMagicConfigs.MotionMagicCruiseVelocity =
-            GeneralWithSimConstants.MotionMagicConstants.MOTION_MAGIC_VELOCITY;
+            GeneralWithoutSimConstants.MotionMagicConstants.MOTION_MAGIC_VELOCITY;
             motionMagicConfigs.MotionMagicAcceleration =
-            GeneralWithSimConstants.MotionMagicConstants.MOTION_MAGIC_ACCELERATION;
+            GeneralWithoutSimConstants.MotionMagicConstants.MOTION_MAGIC_ACCELERATION;
             motionMagicConfigs.MotionMagicJerk =
-            GeneralWithSimConstants.MotionMagicConstants.MOTION_MAGIC_JERK;
+            GeneralWithoutSimConstants.MotionMagicConstants.MOTION_MAGIC_JERK;
             motionMagicConfigs.MotionMagicExpo_kA = 
-            GeneralWithSimConstants.MotionMagicConstants.MotionMagicExpo_kA;
+            GeneralWithoutSimConstants.MotionMagicConstants.MotionMagicExpo_kA;
             motionMagicConfigs.MotionMagicExpo_kV = 
-            GeneralWithSimConstants.MotionMagicConstants.MotionMagicExpo_kV;
+            GeneralWithoutSimConstants.MotionMagicConstants.MotionMagicExpo_kV;
 
         Slot0Configs slot0 = talonFXConfiguration.Slot0;
-            slot0.kS = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KS;
-            slot0.kG = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KG;
-            slot0.kV = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KV;
-            slot0.kA = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KA;
-            slot0.kP = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KP;
-            slot0.kI = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KI;
-            slot0.kD = GeneralWithSimConstants.MotionMagicConstants.MOTOR_KD;
-            slot0.GravityType = GeneralWithSimConstants.MotionMagicConstants.GravityType;
+            slot0.kS = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KS;
+            slot0.kG = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KG;
+            slot0.kV = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KV;
+            slot0.kA = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KA;
+            slot0.kP = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KP;
+            slot0.kI = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KI;
+            slot0.kD = GeneralWithoutSimConstants.MotionMagicConstants.MOTOR_KD;
+            slot0.GravityType = GeneralWithoutSimConstants.MotionMagicConstants.GravityType;
 
         StatusCode status = StatusCode.StatusCodeNotInitialized;
         for (int i = 0; i < 5; ++i) {
@@ -66,7 +63,7 @@ public class GeneralWithoutSim extends SubsystemBase {
             if (!status.isOK()) {
         System.out.println("Could not configure device. Error: " + status.toString());
         }
-        subsystemMotor.setControl(motionMagicExpoVoltage.withPosition(GeneralWithSimConstants.rotaion_Sim_Constants.startingAngle)
+        subsystemMotor.setControl(motionMagicExpoVoltage.withPosition(GeneralWithoutSimConstants.startingAngle)
         .withSlot(0));
         this.setDefaultCommand(this.defualtCommand());
   }
@@ -76,6 +73,7 @@ public class GeneralWithoutSim extends SubsystemBase {
     // This method will be called once per scheduler run
   }
   public void setDegree(double degree){
+    degree = Math.min(GeneralWithoutSimConstants.maxAngle.in(Degree),Math.max(GeneralWithoutSimConstants.minAngle.in(Degree), degree) );
     motionMagicExpoVoltage.withPosition(degree);
   }
   public Command setDegreeCommand(double degree){
