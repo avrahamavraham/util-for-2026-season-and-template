@@ -4,10 +4,12 @@
 
 package frc.robot;
 
-import frc.robot.subsytem.generalsubsytem.without_sim.GeneralWithoutSim;
+import frc.robot.subsytem.elevatorWithSim.Elevator;
+import frc.robot.subsytem.elevatorWithSim.ElevatorIOSim;
 
 /** Add your docs here. */
 public class Subsytem {
     // GeneralWithSim general = new GeneralWithSim(new GeneralIOSim(SingleJointedArmSim.class.getName()));
-    GeneralWithoutSim general = new GeneralWithoutSim();
+    // GeneralWithoutSim general = new GeneralWithoutSim();
+    public Elevator elevator = new Elevator(new ElevatorIOSim());
 }

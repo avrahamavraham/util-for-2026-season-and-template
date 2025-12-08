@@ -5,9 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 
 /** Add your docs here. */
 public final class Controler {
     public static CommandPS5Controller swerveController = new CommandPS5Controller(0);
     public static CommandPS5Controller subController = new CommandPS5Controller(1);
+    public static CommandXboxController testController = new CommandXboxController(0);
 }

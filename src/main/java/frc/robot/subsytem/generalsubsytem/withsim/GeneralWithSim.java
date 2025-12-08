@@ -7,6 +7,7 @@ package frc.robot.subsytem.generalsubsytem.withsim;
 import java.util.Optional;
 
 import org.littletonrobotics.junction.AutoLogOutput;
+import org.littletonrobotics.junction.Logger;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.subsytem.generalsubsytem.withsim.GeneralIO.GeneralInputs;
@@ -16,7 +17,7 @@ public class GeneralWithSim extends SubsystemBase {
   @AutoLogOutput
   Generalstate state = Generalstate.KeepItIn;
   GeneralIO io;
-  GeneralInputs inputs;
+  GeneralInputsAutoLogged inputs;
   /** Creates a new GeneralSubsystem. */
   public GeneralWithSim(GeneralIO io) {
     this.io = io;
@@ -26,6 +27,7 @@ public class GeneralWithSim extends SubsystemBase {
   @Override
   public void periodic() {
     io.updateInputs(inputs);
+    Logger.processInputs("GeneralWithSim", inputs);
   }
   @Override
   public void simulationPeriodic() {

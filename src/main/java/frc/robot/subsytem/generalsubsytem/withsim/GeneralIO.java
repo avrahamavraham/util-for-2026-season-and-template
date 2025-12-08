@@ -12,9 +12,10 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-@AutoLog
+
 public interface GeneralIO {
-    public class GeneralInputs {
+    @AutoLog
+    public static class GeneralInputs {
         public Angle rotaion;
         public AngularVelocity speed;
         public boolean MotorConncted = false;
