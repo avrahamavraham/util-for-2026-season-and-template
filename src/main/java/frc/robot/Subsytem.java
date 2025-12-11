@@ -4,8 +4,8 @@
 
 package frc.robot;
 
-import frc.robot.subsytem.elevatorWithSim.Elevator;
-import frc.robot.subsytem.elevatorWithSim.ElevatorIOSim;
+import frc.robot.subsytem.ElevatorWithSim.Elevator;
+import frc.robot.subsytem.ElevatorWithSim.ElevatorIOSim;
 
 /** Add your docs here. */
 public class Subsytem {

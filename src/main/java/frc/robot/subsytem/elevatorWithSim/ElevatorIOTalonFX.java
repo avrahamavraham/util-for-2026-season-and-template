@@ -2,12 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.elevatorWithSim;
-
-import static edu.wpi.first.units.Units.Centimeter;
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.MetersPerSecond;
-
+package frc.robot.subsytem.ElevatorWithSim;
 
 import com.ctre.phoenix6.StatusCode;
 import com.ctre.phoenix6.configs.FeedbackConfigs;
@@ -18,7 +13,7 @@ import com.ctre.phoenix6.configs.TalonFXConfiguration;
 import com.ctre.phoenix6.controls.Follower;
 import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
-import edu.wpi.first.units.measure.Distance;
+
 import edu.wpi.first.wpilibj.DigitalInput;
 
 /** Add your docs here. */
@@ -63,14 +58,14 @@ public class ElevatorIOTalonFX implements ElevatorIO {
     @Override
     public void updateInputs(ElevatorInputs inputs){
         inputs.isMotorConnect = m_master.isConnected() && m_slave.isConnected();
-        inputs.Height = Meters.of(m_master.getPosition().getValueAsDouble());
+        inputs.Height = m_master.getPosition().getValueAsDouble();
         inputs.isClosed = m_closeSwitch.get();
-        inputs.speed = MetersPerSecond.of(m_master.getVelocity().getValueAsDouble());
-        inputs.voltage = m_master.getMotorVoltage().getValue();
+        inputs.speed = m_master.getVelocity().getValueAsDouble();
+        inputs.voltage = m_master.getMotorVoltage().getValueAsDouble();
     }
     @Override
-    public void setHeight(Distance Height){
-        motionMagicExpoVoltage.withPosition(Height.in(Centimeter));
+    public void setHeight(Double Height){
+        motionMagicExpoVoltage.withPosition(Height);
     }
     @Override
     public void setSpeed(double voltz){

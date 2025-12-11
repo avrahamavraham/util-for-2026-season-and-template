@@ -2,11 +2,8 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.elevatorWithSim;
+package frc.robot.subsytem.ElevatorWithSim;
 
-import static edu.wpi.first.units.Units.Centimeter;
-import static edu.wpi.first.units.Units.Meters;
-import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.Volts;
 
 import com.ctre.phoenix6.StatusCode;
@@ -19,7 +16,6 @@ import com.ctre.phoenix6.controls.MotionMagicExpoVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.math.system.plant.LinearSystemId;
-import edu.wpi.first.units.measure.Distance;
 import edu.wpi.first.wpilibj.simulation.ElevatorSim;
 
 /** Add your docs here. */
@@ -71,14 +67,14 @@ public class ElevatorIOSim implements ElevatorIO{
         SimMotor.setRawRotorPosition(Sim.getPositionMeters() * ElevatorConstants.POSITION_CONVERSION_FACTOR);
         SimMotor.setRotorVelocity(Sim.getVelocityMetersPerSecond() * ElevatorConstants.POSITION_CONVERSION_FACTOR);
         inputs.isMotorConnect = true;
-        inputs.Height = Meters.of(Sim.getPositionMeters());
-        inputs.speed = MetersPerSecond.of(Sim.getVelocityMetersPerSecond());
-        inputs.voltage = Volts.of(Sim.getInput(0));
+        inputs.Height = Sim.getPositionMeters();
+        inputs.speed = Sim.getVelocityMetersPerSecond();
+        inputs.voltage = Sim.getInput(0);
         inputs.isClosed = Sim.getPositionMeters() < 0.02;
     }
     @Override
-    public void setHeight(Distance Height){
-        m_master.setControl(motionMagicExpoVoltage.withPosition(Height.in(Centimeter)).withSlot(0));
+    public void setHeight(Double Height){
+        m_master.setControl(motionMagicExpoVoltage.withPosition(Height).withSlot(0));
     }
     @Override
     public void setSpeed(double Volts){

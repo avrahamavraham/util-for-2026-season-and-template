@@ -1,11 +1,8 @@
-package frc.robot.subsytem.generalsubsytem.withsim;
+package frc.robot.subsytem.Generalsubsytem.withsim;
 
-import static edu.wpi.first.units.Units.Degree;
+import frc.lib.util.ITarget;
 
-import edu.wpi.first.units.measure.Angle;
-import frc.lib.util.ITargetAngle;
-
-public enum Generalstate implements ITargetAngle{
+public enum Generalstate implements ITarget{
   /**
    * this is how a state control shold look like 
    */
@@ -15,19 +12,15 @@ public enum Generalstate implements ITargetAngle{
     Collect(-1),
     Eject(1);
     /**have the double that you want to store*/
-    private Angle m_angle;
-    /** a constractor that get a Angle and put it in the Angle vireble*/
-    Generalstate(Angle angle){
-      m_angle = angle;
-    }
+    private double m_angle;
     /**get a double and put it as degrees */
     Generalstate(double degree){
-      m_angle = Degree.of(degree);
+      m_angle = degree;
     }
 
     /** an override method from ITraget that return the value of the double in the enum */
     @Override
-    public Angle getTarget() {
+    public double getTarget() {
       return m_angle;
     }
   }

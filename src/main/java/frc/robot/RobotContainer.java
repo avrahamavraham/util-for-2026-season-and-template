@@ -3,21 +3,13 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-import static edu.wpi.first.units.Units.Meters;
-
-import java.time.format.TextStyle;
-
 import org.littletonrobotics.junction.mechanism.LoggedMechanism2d;
 
-import edu.wpi.first.wpilibj.RobotBase;
-import edu.wpi.first.wpilibj.simulation.BatterySim;
-import edu.wpi.first.wpilibj.simulation.RoboRioSim;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
-import frc.robot.subsytem.elevatorWithSim.ElevatorState;
+import frc.robot.subsytem.ElevatorWithSim.ElevatorState;
 
 public class RobotContainer {
   public static LoggedMechanism2d Mechanism2d = new LoggedMechanism2d(10,10,new Color8Bit(Color.kBlack));

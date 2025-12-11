@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.elevatorWithSim;
+package frc.robot.subsytem.ElevatorWithSim;
 
 import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 
@@ -43,15 +43,15 @@ public class ElevatorConstants {
     public static final double drumMetersRiauds = 0.054;
     }
     public class MotionMagicConstants {
-        public static final LoggedNetworkNumber KP = new LoggedNetworkNumber("Elevator/TalonFX/KP",0 );
-        public static final LoggedNetworkNumber KI = new LoggedNetworkNumber("Elevator/TalonFX/KI",0 );
-        public static final LoggedNetworkNumber KD = new LoggedNetworkNumber("Elevator/TalonFX/KD",0 );
-        public static final LoggedNetworkNumber KV = new LoggedNetworkNumber("Elevator/TalonFX/KV",0 );
-        public static final LoggedNetworkNumber KA = new LoggedNetworkNumber("Elevator/TalonFX/KA",0 );
-        public static final LoggedNetworkNumber KS = new LoggedNetworkNumber("Elevator/TalonFX/KS",0 );
-        public static final LoggedNetworkNumber KG = new LoggedNetworkNumber("Elevator/TalonFX/KG",0 );
-        public static final LoggedNetworkNumber Expo_KV = new LoggedNetworkNumber("Elevator/TalonFX/EXPO_KV",0);
-        public static final LoggedNetworkNumber Expo_KA = new LoggedNetworkNumber("Elevator/TalonFX/EXPO_KA",0);
+        public static final LoggedNetworkNumber KP = new LoggedNetworkNumber("Tuning/Elevator/KP",0 );
+        public static final LoggedNetworkNumber KI = new LoggedNetworkNumber("Tuning/Elevator/KI",0 );
+        public static final LoggedNetworkNumber KD = new LoggedNetworkNumber("Tuning/Elevator/KD",0 );
+        public static final LoggedNetworkNumber KV = new LoggedNetworkNumber("Tuning/Elevator/KV",0 );
+        public static final LoggedNetworkNumber KA = new LoggedNetworkNumber("Tuning/Elevator/KA",0 );
+        public static final LoggedNetworkNumber KS = new LoggedNetworkNumber("Tuning/Elevator/KS",0 );
+        public static final LoggedNetworkNumber KG = new LoggedNetworkNumber("Tuning/Elevator/KG",0 );
+        public static final LoggedNetworkNumber Expo_KV = new LoggedNetworkNumber("Tuning/Elevator/EXPO_KV",0);
+        public static final LoggedNetworkNumber Expo_KA = new LoggedNetworkNumber("Tuning/Elevator/EXPO_KA",0);
         public static final Slot0Configs slot0Configs = new Slot0Configs()
         .withKP(KP.get())
         .withKI(KI.get())

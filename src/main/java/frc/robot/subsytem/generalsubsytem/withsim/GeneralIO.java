@@ -1,15 +1,11 @@
-package frc.robot.subsytem.generalsubsytem.withsim;
+package frc.robot.subsytem.Generalsubsytem.withsim;
 
 import java.util.function.DoubleSupplier;
 
 import org.littletonrobotics.junction.AutoLog;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
-
-import edu.wpi.first.math.geometry.Pose3d;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularVelocity;
-import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 

@@ -2,10 +2,8 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.elevatorWithSim;
+package frc.robot.subsytem.ElevatorWithSim;
 
-import static edu.wpi.first.units.Units.Centimeter;
-import static edu.wpi.first.units.Units.Meters;
 import static edu.wpi.first.units.Units.Volt;
 
 import java.text.DecimalFormat;
@@ -18,13 +16,7 @@ import org.littletonrobotics.junction.mechanism.LoggedMechanism2d;
 import org.littletonrobotics.junction.mechanism.LoggedMechanismLigament2d;
 import org.littletonrobotics.junction.mechanism.LoggedMechanismRoot2d;
 
-import edu.wpi.first.epilogue.Logged;
-import edu.wpi.first.units.measure.Distance;
-import edu.wpi.first.units.measure.Voltage;
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
-import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
-import edu.wpi.first.wpilibj.smartdashboard.MechanismRoot2d;
 import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,11 +24,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Config;
-import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Mechanism;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsytem.elevatorWithSim.ElevatorIO.ElevatorInputs;
 
 public class Elevator extends SubsystemBase {
   private ElevatorIO io;
@@ -84,16 +73,13 @@ public class Elevator extends SubsystemBase {
   }
   @Override
   public void simulationPeriodic(){
-    ligament2dFar.setLength(Math.min(inputs.Height.in(Meters)+1,2.5));
-    ligament2dClose.setLength(inputs.Height.in(Meters)+1);
+    ligament2dFar.setLength(Math.min(inputs.Height+1,2.5));
+    ligament2dClose.setLength(inputs.Height+1);
     Logger.recordOutput("Elevator/mec", mechanism2d);
   }
-  public Command setHeight(Distance Height){
+  public Command setHeight(double Height){
     return Commands.runOnce(()->{
-      if (Height.gt(Meters.of(ElevatorConstants.maxHightMeters))) {
-        Height.minus(Height);
-        Height.plus(Meters.of(ElevatorConstants.maxHightMeters));
-      }
+
       io.setHeight(Height);});
   }
   public Command setSpeed(double speed){
@@ -151,7 +137,7 @@ public class Elevator extends SubsystemBase {
                 () -> {
                   double voltage = timer.get() * FF_RAMP_RATE;
                   io.setSpeed(voltage);
-                  velocitySamples.add(inputs.Height.in(Meters) * ElevatorConstants.POSITION_CONVERSION_FACTOR);
+                  velocitySamples.add(inputs.Height * ElevatorConstants.POSITION_CONVERSION_FACTOR);
                   voltageSamples.add(voltage);
                 },
                 this)

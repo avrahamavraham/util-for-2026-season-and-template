@@ -1,21 +1,15 @@
-package frc.robot.subsytem.elevatorWithSim;
+package frc.robot.subsytem.ElevatorWithSim;
 
-import static edu.wpi.first.units.Units.Meters;
+import frc.lib.util.ITarget;
 
-import edu.wpi.first.units.measure.Distance;
-import frc.lib.util.ITargetDistance;
-
-public enum ElevatorState implements ITargetDistance{
+public enum ElevatorState implements ITarget{
     colse(ElevatorConstants.startingHight),
     level1(ElevatorConstants.startingHight + 1);
-    private Distance m_height;
+    private double m_height;
     private ElevatorState(double height){
-        m_height = Meters.of(height);
-    }
-    private ElevatorState(Distance height){
         m_height = height;
     }
-    public Distance getTarget(){
+    public double getTarget(){
         return m_height;
     }
 }

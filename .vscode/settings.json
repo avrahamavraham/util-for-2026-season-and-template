@@ -39,6 +39,10 @@
     "org.mockito.Answers.*",
     "edu.wpi.first.units.Units.*"
   ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.organizeImports": true
+  },
   "java.completion.filteredTypes": [
     "java.awt.*",
     "com.sun.*",
@@ -57,4 +61,5 @@
     "edu.wpi.first.math.**.proto.*",
     "edu.wpi.first.math.**.struct.*",
   ]
+  
 }

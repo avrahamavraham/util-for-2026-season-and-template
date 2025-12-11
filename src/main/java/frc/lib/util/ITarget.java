@@ -3,6 +3,6 @@ package frc.lib.util;
 import edu.wpi.first.units.measure.Angle;
 
 @FunctionalInterface
-public interface ITargetAngle {
-  public Angle getTarget();
+public interface ITarget {
+  public double getTarget();
 }
