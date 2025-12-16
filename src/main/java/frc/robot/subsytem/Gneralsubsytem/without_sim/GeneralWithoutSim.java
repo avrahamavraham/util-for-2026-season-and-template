@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.Generalsubsytem.without_sim;
+package frc.robot.subsytem.Gneralsubsytem.without_sim;
 
 import static edu.wpi.first.units.Units.Degree;
 
@@ -18,7 +18,7 @@ import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsytem.Generalsubsytem.withsim.Generalstate;
+import frc.robot.subsytem.Gneralsubsytem.withsim.Generalstate;
 
 public class GeneralWithoutSim extends SubsystemBase {
   private TalonFX subsystemMotor = new TalonFX(GeneralWithoutSimConstants.m_MotorId,GeneralWithoutSimConstants.m_CanBusName);

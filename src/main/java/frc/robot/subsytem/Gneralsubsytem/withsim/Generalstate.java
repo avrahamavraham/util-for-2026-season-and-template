@@ -1,4 +1,4 @@
-package frc.robot.subsytem.Generalsubsytem.withsim;
+package frc.robot.subsytem.Gneralsubsytem.withsim;
 
 import frc.lib.util.ITarget;
 

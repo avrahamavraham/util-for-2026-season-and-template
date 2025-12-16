@@ -9,21 +9,20 @@ import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj.util.Color8Bit;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import frc.robot.subsytem.ElevatorWithSim.ElevatorState;
+import frc.robot.button.DefualtButton;
 
 public class RobotContainer {
   public static LoggedMechanism2d Mechanism2d = new LoggedMechanism2d(10,10,new Color8Bit(Color.kBlack));
-  private Subsytem subsytem;
+  private RobotSubsytem subsytem;
+  private Controler controler;
   public RobotContainer() {
-    subsytem = new Subsytem();
+    controler = new Controler();
+    subsytem = new RobotSubsytem();
     configureBindings();
   }
 
   private void configureBindings() {
-    Controler.testController.a().onTrue(subsytem.elevator.PIDFapplieCommand());
-    Controler.testController.b().onTrue(subsytem.elevator.changeStateCommand(ElevatorState.level1));
-    Controler.testController.x().onTrue(subsytem.elevator.changeStateCommand(ElevatorState.colse));
-    Controler.testController.y().onTrue(subsytem.elevator.feedforwardCharacterization());
+    DefualtButton.loadButton(subsytem, controler);
   }
 
   public Command getAutonomousCommand() {

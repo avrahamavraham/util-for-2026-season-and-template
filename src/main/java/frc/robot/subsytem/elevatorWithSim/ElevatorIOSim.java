@@ -28,7 +28,7 @@ public class ElevatorIOSim implements ElevatorIO{
          ElevatorConstants.SimConstants.MassKg, ElevatorConstants.SimConstants.drumMetersRiauds,
           ElevatorConstants.SimConstants.gearRatio),
           ElevatorConstants.SimConstants.dcMotor, ElevatorConstants.minHightMeters, ElevatorConstants.maxHightMeters, true, ElevatorConstants.startingHight);
-                        TalonFXConfiguration talonFXConfiguration = new TalonFXConfiguration();
+            TalonFXConfiguration talonFXConfiguration = new TalonFXConfiguration();
             FeedbackConfigs feedbackConfigsspin = talonFXConfiguration.Feedback;
             feedbackConfigsspin.SensorToMechanismRatio =
              ElevatorConstants.POSITION_CONVERSION_FACTOR;

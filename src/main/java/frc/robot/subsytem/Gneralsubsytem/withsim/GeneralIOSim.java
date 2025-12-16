@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.Generalsubsytem.withsim;
+package frc.robot.subsytem.Gneralsubsytem.withsim;
 
 import static edu.wpi.first.units.Units.DegreesPerSecond;
 import static edu.wpi.first.units.Units.Radian;
@@ -32,6 +32,7 @@ import edu.wpi.first.wpilibj.smartdashboard.MechanismLigament2d;
 /** Add your docs here. */
 public class GeneralIOSim implements GeneralIO{
     private TalonFX subsystemMotor;
+    @SuppressWarnings("rawtypes")
     private LinearSystemSim Sim;
     private MotionMagicExpoVoltage motionMagicExpoVoltage = new MotionMagicExpoVoltage(0);
     public GeneralIOSim(String simClass){

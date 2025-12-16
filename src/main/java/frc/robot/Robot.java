@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import org.ironmaple.simulation.SimulatedArena;
 import org.littletonrobotics.junction.LogFileUtil;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -106,5 +107,11 @@ public class Robot extends LoggedRobot {
   @Override
   public void testExit() {}
   @Override
-  public void simulationPeriodic(){}
+  public void simulationInit(){
+    SimulatedArena.getInstance();
+  }
+  @Override
+  public void simulationPeriodic(){
+    SimulatedArena.getInstance().simulationPeriodic();
+  }
 }

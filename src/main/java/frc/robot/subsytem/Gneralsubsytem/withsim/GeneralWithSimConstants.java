@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsytem.Generalsubsytem.withsim;
+package frc.robot.subsytem.Gneralsubsytem.withsim;
 
 import static edu.wpi.first.units.Units.Degree;
 
@@ -54,13 +54,13 @@ public class GeneralWithSimConstants {
             public static final double POSITION_CONVERSION_FACTOR = (1/(gearRatio*drumMeters));
         }
         public final class MotionMagicConstants {
-        public static final double MOTION_MAGIC_VELOCITY = 0; //TODO : this must be tune to a mechanism
+        public static final double MOTION_MAGIC_VELOCITY = 0;
         public static final double MOTION_MAGIC_ACCELERATION = 0;
         public static final double MOTION_MAGIC_JERK = 0;
         public static final double MotionMagicExpo_kA = 0;
         public static final double MotionMagicExpo_kV = 0;
 
-        public static final double MOTOR_KS = 0; // TODO INITILIZE THESE VALUES
+        public static final double MOTOR_KS = 0;
         public static final double MOTOR_KA = 0;
         public static final double MOTOR_KV = 0;
         public static final double MOTOR_KG = 0;
