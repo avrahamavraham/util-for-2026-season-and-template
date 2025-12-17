@@ -1,6 +1,6 @@
 package frc.robot.subsystems.drive;
 
-import static frc.robot.util.PhoenixUtil.tryUntilOk;
+import static frc.lib.util.PhoenixUtil.tryUntilOk;
 
 import com.ctre.phoenix6.BaseStatusSignal;
 import com.ctre.phoenix6.StatusSignal;
@@ -23,7 +23,6 @@ import edu.wpi.first.units.measure.AngularVelocity;
 import edu.wpi.first.units.measure.Current;
 import edu.wpi.first.units.measure.Voltage;
 import frc.robot.Constants;
-import frc.robot.generated.TunerConstants;
 
 public abstract class ModuleIOTalonFX implements ModuleIO {
     protected final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> constants;
@@ -85,7 +84,7 @@ public abstract class ModuleIOTalonFX implements ModuleIO {
         turnConfig.MotorOutput.NeutralMode = NeutralModeValue.Brake;
         turnConfig.Slot0 = constants.SteerMotorGains;
         if (Constants.currentMode == Constants.Mode.SIM)
-            turnConfig.Slot0.withKD(0.5).withKS(0); // during simulation, gains are slightly different
+            turnConfig.Slot0.withKD(2).withKS(0); // during simulation, gains are slightly different
 
         turnConfig.Feedback.FeedbackRemoteSensorID = constants.EncoderId;
         turnConfig.Feedback.FeedbackSensorSource = switch (constants.FeedbackSource) {
