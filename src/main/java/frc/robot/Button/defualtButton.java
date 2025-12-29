@@ -4,6 +4,8 @@
 
 package frc.robot.Button;
 
+import edu.wpi.first.math.geometry.Pose2d;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.button.CommandPS5Controller;
 import frc.robot.Controler;
 import frc.robot.Robotsubsystems;
@@ -14,6 +16,10 @@ import frc.robot.subsystems.drive.Drive;
 public class defualtButton {
     public static void loadButton(Robotsubsystems subsystems, Controler controller) {
         swerveDefualt(subsystems.drive, controller.swerveController);
+        controller
+                .swerveController
+                .triangle()
+                .whileTrue(subsystems.driveToPointFactory.driveToPose(new Pose2d(2, 2, new Rotation2d(Math.PI))));
     }
 
     private static void swerveDefualt(Drive drive, CommandPS5Controller controller) {

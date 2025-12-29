@@ -41,7 +41,6 @@ public class RobotContainer {
     // Controller
     Controler controler;
     public static LoggedMechanism2d Mechanism2d = new LoggedMechanism2d(10, 10, new Color8Bit(Color.kBlack));
-
     // Dashboard inputs
     private final LoggedDashboardChooser<Command> autoChooser;
 
@@ -49,7 +48,6 @@ public class RobotContainer {
     public RobotContainer() {
         subsystems = new Robotsubsystems();
         controler = new Controler();
-
         // Set up auto routines
         autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
 

@@ -6,6 +6,7 @@ package frc.robot;
 
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
+import frc.lib.util.DriveToPointFactory;
 import frc.robot.subsystems.ArmPitch.ArmPitch;
 import frc.robot.subsystems.ElevatorWithSim.Elevator;
 import frc.robot.subsystems.Gneralsubsystems.withsim.GeneralWithSim;
@@ -32,10 +33,11 @@ public class Robotsubsystems {
     // GeneralWithoutSim general = new GeneralWithoutSim();
     private SwerveDriveSimulation driveSimulation = null;
     public Elevator elevator = null;
-    public Drive drive = null;
+    public Drive drive;
     public Gripper gripper = null;
     public GeneralWithSim general = null;
     public ArmPitch arm = null;
+    public DriveToPointFactory driveToPointFactory;
 
     public Robotsubsystems() {
         switch (Constants.currentMode) {
@@ -92,6 +94,7 @@ public class Robotsubsystems {
 
                 break;
         }
+        driveToPointFactory = new DriveToPointFactory(drive);
     }
 
     public void resetSimulationField() {
