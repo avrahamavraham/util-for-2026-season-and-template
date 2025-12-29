@@ -2,7 +2,7 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.subsystems.ArmPitch;
+package frc.robot.subsystems.IntakePitch;
 
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.signals.GravityTypeValue;
@@ -12,7 +12,7 @@ import edu.wpi.first.math.system.plant.DCMotor;
 import org.littletonrobotics.junction.networktables.LoggedNetworkNumber;
 
 /** Add your docs here. */
-public class ArmPitchConstants {
+public class IntakePitchConstants {
     /** the DC motor that is used */
     public static final DCMotor dcMotor = DCMotor.getKrakenX60(1);
     /** the id of the motor subsystem */
@@ -28,7 +28,7 @@ public class ArmPitchConstants {
 
     public static final double maxAngleRads = 0;
     /** the start position of the motor (ArmPitch should start at 90 if are facing up) */
-    public static final double startingAngle = 90;
+    public static final double startingPosition = 90;
     /** the length of the mechanism */
     public static final double lengthMeters = 0;
     /** the MOI for the mechanism get is from CAD (אתה לוקח את זה מסרטוט) */
@@ -37,13 +37,13 @@ public class ArmPitchConstants {
     public static final double POSITION_CONVERSION_FACTOR = (1 / (gearRatio * 360));
 
     public final class MotionMagicConstants {
-        public static final LoggedNetworkNumber KP = new LoggedNetworkNumber("Tuning/ArmPitch/KP", 0);
-        public static final LoggedNetworkNumber KI = new LoggedNetworkNumber("Tuning/ArmPitch/KI", 0);
-        public static final LoggedNetworkNumber KD = new LoggedNetworkNumber("Tuning/ArmPitch/KD", 0);
-        public static final LoggedNetworkNumber KV = new LoggedNetworkNumber("Tuning/ArmPitch/KV", 0);
-        public static final LoggedNetworkNumber KA = new LoggedNetworkNumber("Tuning/ArmPitch/KA", 0);
-        public static final LoggedNetworkNumber KS = new LoggedNetworkNumber("Tuning/ArmPitch/KS", 0);
-        public static final LoggedNetworkNumber KG = new LoggedNetworkNumber("Tuning/ArmPitch/KG", 0);
+        public static final LoggedNetworkNumber KP = new LoggedNetworkNumber("Tuning/IntakePitch/KP", 0);
+        public static final LoggedNetworkNumber KI = new LoggedNetworkNumber("Tuning/IntakePitch/KI", 0);
+        public static final LoggedNetworkNumber KD = new LoggedNetworkNumber("Tuning/IntakePitch/KD", 0);
+        public static final LoggedNetworkNumber KV = new LoggedNetworkNumber("Tuning/IntakePitch/KV", 0);
+        public static final LoggedNetworkNumber KA = new LoggedNetworkNumber("Tuning/IntakePitch/KA", 0);
+        public static final LoggedNetworkNumber KS = new LoggedNetworkNumber("Tuning/IntakePitch/KS", 0);
+        public static final LoggedNetworkNumber KG = new LoggedNetworkNumber("Tuning/IntakePitch/KG", 0);
         public static final Slot0Configs slot0Configs = new Slot0Configs()
                 .withKP(KP.get())
                 .withKI(KI.get())

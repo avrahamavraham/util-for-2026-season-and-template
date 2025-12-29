@@ -44,8 +44,6 @@ public class ArmPitchIOSim implements ArmPitchIO {
         motionMagicConfigs.MotionMagicCruiseVelocity = ArmPitchConstants.MotionMagicConstants.MOTION_MAGIC_VELOCITY;
         motionMagicConfigs.MotionMagicAcceleration = ArmPitchConstants.MotionMagicConstants.MOTION_MAGIC_ACCELERATION;
         motionMagicConfigs.MotionMagicJerk = ArmPitchConstants.MotionMagicConstants.MOTION_MAGIC_JERK;
-        motionMagicConfigs.MotionMagicExpo_kA = ArmPitchConstants.MotionMagicConstants.Expo_KV.get();
-        motionMagicConfigs.MotionMagicExpo_kV = ArmPitchConstants.MotionMagicConstants.Expo_KV.get();
 
         talonFXConfiguration.Slot0 = ArmPitchConstants.MotionMagicConstants.slot0Configs;
 
