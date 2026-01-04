@@ -4,21 +4,16 @@
 
 package frc.lib.Mechanism;
 
-import java.util.function.BooleanSupplier;
-import java.util.function.DoubleSupplier;
+import java.util.function.Consumer;
+import java.util.function.DoubleConsumer;
 
-import javax.xml.crypto.Data;
-
-import org.littletonrobotics.junction.LogTable;
-import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.inputs.LoggableInputs;
+import org.littletonrobotics.junction.mechanism.LoggedMechanism2d;
+import org.littletonrobotics.junction.mechanism.LoggedMechanismLigament2d;
 
-import com.ctre.phoenix6.controls.ControlRequest;
 import com.ctre.phoenix6.hardware.TalonFX;
 
-import edu.wpi.first.wpilibj.smartdashboard.Mechanism2d;
 import frc.robot.Robot;
-import frc.robot.subsystems.Turret.Turret;
 
 /** Add your docs here. */
 public class Mechanism {
@@ -36,7 +31,7 @@ public class Mechanism {
 
     private TalonFX Motor;
     private SimulationWrapper simulation;
-    private double positionFactorForSimulation;
+    private double positionFactorForSimulation;;
     public Mechanism(TalonFX Motor, SimulationConfig config) {
         this.Motor = Motor;
         if (config != null && Robot.isSimulation()) {
@@ -44,15 +39,17 @@ public class Mechanism {
         }
         positionFactorForSimulation = config.mechanismType == MechanismType.Elevator
                 ? config.JkMeterSquaerdOrDrum * 2 * Math.PI * config.gearRatio
-                : config.gearRatio;   
-        
+                : config.gearRatio;
     }
 
     public void periodic() {
         
     }
     public void updateVisual(){
-
+        
+    }
+    public LoggableInputs inputsFromMotor(){
+        return new MotorInputsLogged(Motor);
     }
 
     public void simulationPeriodic() {

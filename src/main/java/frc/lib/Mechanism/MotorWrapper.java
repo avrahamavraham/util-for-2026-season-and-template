@@ -50,7 +50,7 @@ public class MotorWrapper {
             if (status.isOK()) break;
         }
         if (!status.isOK()) {
-            System.out.println("Could not configure device. Error: " + status.toString());
+            System.out.println("Could not configure " + config.getMotorName() + ". Error: " + status.toString());
         }
     }
 }
