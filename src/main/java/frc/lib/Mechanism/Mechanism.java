@@ -33,46 +33,10 @@ public class Mechanism {
         /** for evrything else */
         dcMotor;
     }
-    private class MechanismData{
-        private DoubleSupplier position;
-        private DoubleSupplier velocity;
-        private DoubleSupplier accelration;
-        private DoubleSupplier voltage;
-        private BooleanSupplier isConnected;
-
-        public MechanismData (
-                DoubleSupplier position, DoubleSupplier velocity, DoubleSupplier accelration,
-                DoubleSupplier voltage,BooleanSupplier isConnected) {
-            this.position = position;
-            this.velocity = velocity;
-            this.accelration = accelration;
-            this.voltage = voltage;
-            this.isConnected = isConnected;
-        }
-        public boolean isConncted(){
-            return isConnected.getAsBoolean();
-        }
-        public double getPosition() {
-            return position.getAsDouble();
-        }
-
-        public double getVelocity() {
-            return velocity.getAsDouble();
-        }
-
-        public double getAccelration() {
-            return accelration.getAsDouble();
-        }
-
-        public double getVoltage() {
-            return voltage.getAsDouble();
-        }
-    }
 
     private TalonFX Motor;
     private SimulationWrapper simulation;
     private double positionFactorForSimulation;
-    private MechanismData data;
     public Mechanism(TalonFX Motor, SimulationConfig config) {
         this.Motor = Motor;
         if (config != null && Robot.isSimulation()) {
@@ -80,21 +44,7 @@ public class Mechanism {
         }
         positionFactorForSimulation = config.mechanismType == MechanismType.Elevator
                 ? config.JkMeterSquaerdOrDrum * 2 * Math.PI * config.gearRatio
-                : config.gearRatio;
-        if (Robot.isReal()) {
-            data = new MechanismData(Motor.getPosition()::getValueAsDouble, 
-            Motor.getVelocity()::getValueAsDouble, 
-            Motor.getAcceleration()::getValueAsDouble, 
-            Motor.getMotorVoltage()::getValueAsDouble, 
-            Motor::isConnected);    
-        } else{
-            data = new MechanismData(
-                simulation::getPosition, 
-                simulation::getVelocity, 
-                simulation::getAccelration, 
-                simulation::getVoltage, 
-                ()-> true);
-        }
+                : config.gearRatio;   
         
     }
 
@@ -111,5 +61,17 @@ public class Mechanism {
         Motor.getSimState().setRawRotorPosition(simulation.getPosition() * positionFactorForSimulation);
         Motor.getSimState().setRotorVelocity(simulation.getVelocity());
         Motor.getSimState().setRotorAcceleration(simulation.getAccelration());
+    }
+    public double getPosition(){
+        return Motor.getPosition().getValueAsDouble();
+    }
+    public double getVelocity(){
+        return Motor.getVelocity().getValueAsDouble();
+    }
+    public double getAccelration(){
+        return Motor.getAcceleration().getValueAsDouble();
+    }
+    public double getVoltage(){
+        return Motor.getMotorVoltage().getValueAsDouble();
     }
 }

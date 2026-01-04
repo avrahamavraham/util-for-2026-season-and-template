@@ -14,26 +14,21 @@ import edu.wpi.first.wpilibj.simulation.FlywheelSim;
 import edu.wpi.first.wpilibj.simulation.LinearSystemSim;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
 
-import java.security.Key;
+import java.util.concurrent.RunnableFuture;
 import java.util.function.DoubleConsumer;
 import java.util.function.DoubleSupplier;
 
+import org.littletonrobotics.junction.Logger;
+
 /** Add your docs here. */
 public class SimulationWrapper {
-    private class SimData {
-        private DoubleSupplier position;
-        private DoubleSupplier velocity;
-        private DoubleSupplier accelration;
-        private DoubleSupplier voltage;
-
-        public SimData(
-                DoubleSupplier position, DoubleSupplier velocity, DoubleSupplier accelration, DoubleSupplier voltage) {
-            this.position = position;
-            this.velocity = velocity;
-            this.accelration = accelration;
-            this.voltage = voltage;
-        }
-
+    private record SimData(
+        DoubleSupplier position,
+        DoubleSupplier velocity,
+        DoubleSupplier accelration,
+        DoubleSupplier voltage
+) {
+        
         public double getPosition() {
             return position.getAsDouble();
         }
@@ -59,6 +54,9 @@ public class SimulationWrapper {
 
     public SimulationWrapper(SimulationConfig config) {
         try{
+            if (config.mechanismType == null) {
+                throw new Exception("the mechanismType is null and i dont know witch Simulation you want");
+            }
         switch (config.mechanismType) {
             case Arm:
                 SingleJointedArmSim ArmSim = new SingleJointedArmSim(
@@ -78,9 +76,14 @@ public class SimulationWrapper {
                         () -> ArmSim.getInput(0));
                 setUpdateSupplier(ArmSim);
                 setVoltageSupplier(ArmSim);
-                updateMissingData = () -> {
-                    double re = Units.radiansToDegrees(ArmSim.getVelocityRadPerSec()) - missingData;
-                    missingData = Units.radiansToDegrees(ArmSim.getVelocityRadPerSec());
+                updateMissingData = new Runnable() {
+                    double helper = 0;
+
+                    @Override
+                    public void run() {
+                        missingData = Units.radiansToDegrees(ArmSim.getVelocityRadPerSec()) - helper;
+                        helper = Units.radiansToDegrees(ArmSim.getVelocityRadPerSec());
+                    }
                 };
                 break;
             case Elevator:
@@ -101,8 +104,14 @@ public class SimulationWrapper {
                         () -> ElevatorSim.getInput(0));
                 setUpdateSupplier(ElevatorSim);
                 setVoltageSupplier(ElevatorSim);
-                updateMissingData = () -> {
-                    missingData = ElevatorSim.getVelocityMetersPerSecond() / 100;
+                updateMissingData = new Runnable() {
+                    double helper = 0;
+
+                    @Override
+                    public void run() {
+                        missingData = ElevatorSim.getPositionMeters() / 100 - helper;
+                        helper = ElevatorSim.getVelocityMetersPerSecond() /100;
+                    }
                 };
                 break;
             case Flywheel:
@@ -135,13 +144,13 @@ public class SimulationWrapper {
                         () -> DcMotorSim.getInputVoltage());
                 setUpdateSupplier(DcMotorSim);
                 setVoltageSupplier(DcMotorSim);
-
                 break;
             default:
-                System.out.println("you are dumb");
-                break;}}
+                throw new Exception(
+                "how ? i dont know how you did it if you want me to fix this bug send me a masege in whatsapp 0548947448",new Throwable("somehow the enum isnt from the four type that i gave you and isnt null"));
+                }}
             catch (Exception e) {
-                System.out.println(e.toString());    
+                System.out.println(e.toString());
             }
         }
 
@@ -156,6 +165,7 @@ public class SimulationWrapper {
 
     public void update(double dtSeconds) {
         updateSim.accept(dtSeconds);
+        updateMissingData.run();
     }
 
     private void setVoltageSupplier(LinearSystemSim Sim) {
